@@ -1,0 +1,268 @@
+body {
+    font-family: sans-serif;
+    background-color: #EEEEEE; /* Light mode background */
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
+}
+
+h1 {
+    color: #222831;
+    text-align: center;
+}
+
+h4 {
+    color: #222831;
+    text-align: center;
+}
+#btnAddExpense  
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+form input[type="number"],
+form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #44403f;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: none;
+    border-radius: 5px; 
+    padding: 7px;
+}
+form input[type="button`"] {
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: none;
+    border-radius: 5px; 
+    padding: 7px;
+}
+#btnAddIncome, #btnAddExpense {
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: none;
+    border-radius: 5px; 
+    padding: 7px;
+}
+.add-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}   
+.add-expense, .add-income {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.expenses-table {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+}
+
+tr {
+    border-bottom: 1px solid #44403f;
+}
+
+.header {
+    color: #222831;
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+    align-items: center;
+}
+
+h3 {
+    color: #222831;
+    text-align: center;
+    padding: 10px;
+}
+
+#btnLogout {
+    background-color: #222831;
+    color: #EEEEEE;
+    height: 30px;
+    border: none;
+    border-radius: 5px; 
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#toggleTheme {
+    background-color: #393E46;
+    color: #EEEEEE;
+    height: 30px;
+    border: none;
+    border-radius: 5px; 
+    padding: 10px;
+    margin-right: 10px;
+}
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #222831; /* Dark mode background color */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Move the circle to the right */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #222831;
+    color: #EEEEEE;
+}
+
+h1.dark-mode, h4.dark-mode, h3.dark-mode {
+    color: #EEEEEE;
+}
+
+form input[type="submit"].dark-mode {
+    background-color: #EEEEEE;
+    color: #222831;
+}
+
+#btnLogout.dark-mode {
+    background-color: #EEEEEE;
+    color: #222831;
+}
+
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #222831; /* Dark mode background */
+    color: #EEEEEE; /* Dark mode text color */
+}
+
+body.dark-mode h1,
+body.dark-mode h4,
+body.dark-mode h3 {
+    color: #EEEEEE; /* Light text for headers in dark mode */
+}
+
+body.dark-mode form input[type="number"],
+body.dark-mode form input[type="text"] {
+    background-color: #44403f; /* Dark input background */
+    border: 1px solid #EEEEEE; /* Light input border */
+    color: #EEEEEE; /* Light input text color */
+}
+
+body.dark-mode form input[type="submit"] {
+    background-color: #393E46; /* Dark button background */
+    color: #EEEEEE; /* Light button text color */
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-bottom: 1px solid #44403f; /* Light border in dark mode */
+}
+
+body.dark-mode #btnLogout {
+    background-color: #EEEEEE; /* Light logout button */
+    color: #222831; /* Dark text for logout button */
+}
+
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+    }
+
+    form input[type="submit"] {
+        max-width: 100%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+    }
+
+    .expenses-table {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    #btnLogout {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+}

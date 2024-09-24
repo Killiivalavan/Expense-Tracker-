@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Login</title>
+    <link rel="stylesheet" href="stdlogin.css">
+    
+</head>
+<body>
+    <div class="loginbox">
+        <h1><br>Login</h1>
+        <form id="authform" action="{{url_for('login')}}" method="post">
+            <input type="email" name ="email" placeholder="Email ID" id="authinput"><br>
+            <input type="password" name="password" placeholder="Password" id="authinput"><br>
+            <div class="button-group">
+                <input type="submit" value="Login" id="btnLogin" onclick="setActionForm('login')">
+                <input type="button" value="Signup" id="btnLogin" onclick="setActionForm('signup')">
+            </div>
+            
+        </form>
+
+        
+    </div>
+</body>
+<script>
+    function setActionForm(action){
+        let form = document.getElementById("authform");
+        if (action === "login"){
+            form.action = "{{url_for('login')}}";
+            form.method = "post";
+        } else if (action === "signup"){
+            form.action = "{{url_for('signup')}}";
+            form.method = "post";
+        }
+        form.submit();
+    }
+
+</script>
+</html>
