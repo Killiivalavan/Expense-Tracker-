@@ -77,28 +77,12 @@ def dashboard():
 
     user_id = session["user_id"]
 
-    # Fetch expenses with aliased date column
-    expenses = db.session.query(
-        Expense.id.label('transaction_id'),
-        Expense.description.label('transaction_description'),
-        Expense.amount.label('transaction_amount'),
-        Expense.date.label('transaction_date'),  # Rename date column here
-        db.literal('Expense').label('transaction_type')
-    ).filter_by(user_id=user_id)
+    # Fetch expenses and incomes, ordered by date in descending order
+    expenses = Expense.query.filter_by(user_id=user_id).order_by(Expense.date.desc()).all()
+    incomes = Income.query.filter_by(user_id=user_id).order_by(Income.date.desc()).all()
 
-    # Fetch incomes with aliased date column
-    incomes = db.session.query(
-        Income.id.label('transaction_id'),
-        Income.description.label('transaction_description'),
-        Income.amount.label('transaction_amount'),
-        Income.date.label('transaction_date'),  # Rename date column here
-        db.literal('Income').label('transaction_type')
-    ).filter_by(user_id=user_id)
-
-    # Combine the expenses and incomes and order by the renamed date column
-    transactions = expenses.union(incomes).order_by(db.desc(text('transaction_date'))).all()
-
-    return render_template("dashboard.html", email=session["email"], transactions=transactions)
+    # No need to combine and sort in Python; they are already sorted in the database query.
+    return render_template("dashboard.html", email=session["email"], expenses=expenses, incomes=incomes)
 
     
 @app.route("/logout", methods=["POST"])

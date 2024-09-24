@@ -62,23 +62,31 @@
                     <th>Amount</th>
                     <th>Actions</th>
                 </tr>
-        
-                <!-- Looping through combined transactions -->
-                {% for transaction in transactions %}
+    
+                <!-- Looping through Expenses -->
+                {% for expense in expenses %}
                     <tr>
-                        <td>{{ transaction.date.date() }}</td>
-                        <td>{{ transaction.description }}</td>
-                        <td class="{{ 'income-amount' if transaction.transaction_type == 'Income' else 'expense-amount' }}">
-                            {% if transaction.transaction_type == 'Income' %}
-                                + {{ transaction.amount }}
-                            {% else %}
-                                - {{ transaction.amount }}
-                            {% endif %}
-                        </td>
+                        <td>{{ expense.date.date() }}</td>
+                        <td>{{ expense.description }} </td>
+                        <td class="expense-amount">- {{ expense.amount }}</td>
                         <td>
-                            <a href="/delete/{{ transaction.id }}">Delete</a>
+                            <a href="/delete/{{ expense.id }}">Delete</a>
                             <br>
-                            <a href="/update/{{ transaction.id }}">Update</a>
+                            <a href="/update/{{ expense.id }}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+    
+                <!-- Looping through Income -->
+                {% for income in incomes %}
+                    <tr>
+                        <td>{{ income.date.date() }}</td>
+                        <td>{{ income.description }} </td>
+                        <td class="income-amount">+ {{ income.amount }}</td>
+                        <td>
+                            <a href="/delete_income/{{ income.id }}">Delete</a>
+                            <br>
+                            <a href="/update_income/{{ income.id }}">Update</a>
                         </td>
                     </tr>
                 {% endfor %}
