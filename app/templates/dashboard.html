@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- Hamburger Menu -->
+            <button id="menuBtn" class="menu-btn" aria-label="Menu">
+                <div class="menu-btn-line"></div>
+                <div class="menu-btn-line"></div>
+                <div class="menu-btn-line"></div>
+            </button>
+            <h3>Welcome, {{current_user.email}}</h3>
+            <div class="header-controls">
+                <!-- Dark Mode Toggle Switch -->
+                <button id="darkModeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <!-- Settings Button -->
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+                <form id="logoutForm" action="{{ url_for('auth.logout') }}" method="POST" style="display: inline;">
+                    <button type="submit" id="btnLogout">Logout</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Side Menu -->
+        <div id="sideMenu" class="side-menu">
+            <div class="side-menu-content">
+                <button id="dashboardTab" class="menu-tab active" title="Dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </button>
+                <button id="insightsTab" class="menu-tab" title="Insights">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-panel-header">
+                <h2>Settings</h2>
+                <button id="closeSettings" class="close-settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="settings-panel-content">
+                <div class="settings-section">
+                    <h3>Currency Settings</h3>
+                    <div class="settings-item">
+                        <label for="currency">Select Currency:</label>
+                        <select id="currency" name="currency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="JPY">JPY (¥)</option>
+                            <option value="INR">INR (₹)</option>
+                            <option value="CNY">CNY (¥)</option>
+                            <option value="AUD">AUD ($)</option>
+                            <option value="CAD">CAD ($)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel Overlay -->
+        <div id="settingsOverlay" class="settings-overlay"></div>
+
+        <!-- Main Content -->
+        <div id="mainContent">
+            <!-- Dashboard View -->
+            <div id="dashboardView">
+                <div class="add-buttons">
+                    <button onclick="toggleForm('expense')" class="button button-primary">Add Expense</button>
+                    <button onclick="toggleForm('income')" class="button button-secondary">Add Income</button>
+                    <button onclick="toggleDeleteMode()" class="button button-danger">Delete Entries</button>
+                </div>
+
+                <!-- Forms for adding expense and income -->
+                <div id="expenseForm" class="form-container" style="display: none;">
+                    <form action="{{ url_for('expense.add_expense') }}" method="POST">
+                        <input type="text" name="description" placeholder="Description" required>
+                        <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+                        <div class="form-buttons">
+                            <button type="submit" class="button button-primary">Add</button>
+                            <button type="button" class="button button-secondary" onclick="toggleForm('expense')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="incomeForm" class="form-container" style="display: none;">
+                    <form action="{{ url_for('income.add_income') }}" method="POST">
+                        <input type="text" name="description" placeholder="Description" required>
+                        <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+                        <div class="form-buttons">
+                            <button type="submit" class="button button-primary">Add</button>
+                            <button type="button" class="button button-secondary" onclick="toggleForm('income')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Dashboard content -->
+                <div class="dashboard-content">
+                    <!-- Table Container -->
+                    <div class="table-container">
+                        <h2>Dashboard</h2>
+                        {% if transactions %}
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="checkbox-column" style="display: none;">Select</th>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for transaction in transactions %}
+                                        <tr>
+                                            <td class="checkbox-column" style="display: none;">
+                                                <input type="checkbox" class="delete-checkbox" data-id="{{ transaction.id }}" data-type="{{ transaction.__class__.__name__.lower() }}">
+                                            </td>
+                                            <td>{{ transaction.date.strftime('%Y-%m-%d') }}</td>
+                                            <td>{{ transaction.description }}</td>
+                                            <td class="{% if transaction.__class__.__name__ == 'Expense' %}expense-amount{% else %}income-amount{% endif %}">
+                                                {{ transaction.amount }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <div id="delete-controls" style="display: none;" class="delete-controls">
+                                <button onclick="deleteSelected()" class="delete-confirm">Delete Selected</button>
+                                <button onclick="toggleDeleteMode()" class="delete-cancel">Cancel</button>
+                            </div>
+                        {% else %}
+                            <p>No transactions yet.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="card">
+                        <div class="chart-container">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                        <div class="balance-display">
+                            <h3>Remaining Balance</h3>
+                            <div id="balanceAmount" class="balance-amount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights View -->
+            <div id="insightsView" style="display: none;">
+                <div class="insights-content">
+                    <div class="insights-header">
+                        <h2>Expense Trend</h2>
+                        <div class="time-period-controls">
+                            <div class="time-period-selector">
+                                <label for="timePeriod">Time Period:</label>
+                                <select id="timePeriod" class="time-period-select">
+                                    <option value="custom">Custom Range</option>
+                                    <option value="30" selected>Last 30 Days</option>
+                                    <option value="90">Last 3 Months</option>
+                                    <option value="180">Last 6 Months</option>
+                                    <option value="365">Last 1 Year</option>
+                                </select>
+                            </div>
+                            <div id="dateRangeSelector" class="date-range-selector" style="display: none;">
+                                <div class="date-input-group">
+                                    <label for="startDate">Start Date:</label>
+                                    <input type="date" id="startDate" class="date-input">
+                                </div>
+                                <div class="date-input-group">
+                                    <label for="endDate">End Date:</label>
+                                    <input type="date" id="endDate" class="date-input">
+                                </div>
+                                <button id="applyDateRange" class="apply-date-btn">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insights-chart-container">
+                        <div class="insights-chart-wrapper">
+                            <canvas id="monthlyExpenseChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/mainmenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+</body>
+</html>

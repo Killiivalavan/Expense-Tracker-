@@ -1,0 +1,119 @@
+/* Reset default styles and set a dark background */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #e0e0e0;
+}
+
+/* Style the main container */
+.loginbox {
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Style the heading */
+h1 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Style the submit button */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+/* Style the link paragraph */
+p {
+    margin-top: 1rem;
+    color: #b0b0b0;
+}
+
+a {
+    color: #4a90e2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #357abd;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+    .loginbox {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    input, button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Add a subtle glow effect to inputs on focus */
+input:focus {
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+}
+
+/* Add a subtle transition effect when hovering over the form */
+.loginbox {
+    transition: transform 0.3s ease;
+}
+
+.loginbox:hover {
+    transform: translateY(-5px);
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

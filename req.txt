@@ -1,6 +1,6 @@
 AI
-Expense Categorization Automation
-Budget Prediction
+Expense Categorization Automation ---------
+Budget Recommendation ---------
 Expense Insights and Trends
 Smart Savings Recommendations
 Voice-Activated Assistant for Expense Entry(possibly)
@@ -9,10 +9,12 @@ Voice-Activated Assistant for Expense Entry(possibly)
 color pallete -------
 template
 
-about section 
-DROP DOWN MENU
+about section
+DROP DOWN MENU ----------
 NAME
 LOGO
-data vis
+data vis 
+    (pie chart)
+    (line graph)
 
 (reviews)

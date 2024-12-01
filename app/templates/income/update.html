@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div>
+
+        <h1>Update Expense</h1>
+        <div class="update-expense">
+            <form action="/update/{{ expense.id }}" method="POST">
+                <input type="text" name="description" placeholder="Description" id="description" value="{{ expense.description }}">
+                <input type="number" name="amount" placeholder="Amount" id="amount" step ="0.01" value="{{ expense.amount }}">
+                <input type="submit" value="Update">
+        </div>  
+    </div>
+</body>
+</html>
